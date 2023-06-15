@@ -1,10 +1,30 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import Root from "./Root";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyByJfGiBY_HLxQ2KMSkxX7GtUNuczJ667o",
+  authDomain: "react-remote-drive.firebaseapp.com",
+  projectId: "react-remote-drive",
+  storageBucket: "react-remote-drive.appspot.com",
+  messagingSenderId: "661491417054",
+  appId: "1:661491417054:web:65b406a7c47a8aecc7274f",
+};
+
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
+export const provider = new GoogleAuthProvider();
+export const auth = getAuth(app);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <Root />
+  </React.StrictMode>
+);

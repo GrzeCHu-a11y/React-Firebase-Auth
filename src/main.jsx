@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import Root from "./Root";
+import Root from "./routes/Root";
+import { AuthProvider } from "./providers/AuthProvider";
+import ProtectedRoute from "./helpers/ProtectedRoute";
+import Posts from "./routes/Posts";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,8 +26,21 @@ export const app = initializeApp(firebaseConfig);
 export const provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<p>Hello React Router!</p>} />
+      <Route path="posts" element={<ProtectedRoute />}>
+        <Route index element={<Posts />} />
+      </Route>
+    </Route>
+  )
+);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Root />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

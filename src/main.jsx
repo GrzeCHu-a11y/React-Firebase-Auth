@@ -8,6 +8,7 @@ import Root from "./routes/Root";
 import { AuthProvider } from "./providers/AuthProvider";
 import ProtectedRoute from "./helpers/ProtectedRoute";
 import Posts from "./routes/Posts";
+import "bootstrap/dist/css/bootstrap.min.css";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,7 +30,7 @@ export const auth = getAuth(app);
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<p>Hello React Router!</p>} />
+      <Route index />
       <Route path="posts" element={<ProtectedRoute />}>
         <Route index element={<Posts />} />
       </Route>
